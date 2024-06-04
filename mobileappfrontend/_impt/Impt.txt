@@ -1,0 +1,5 @@
+1. to create apk installer
+open git bash
+cd /c/_Work.Dir/FlutterIotArduino/mobileappfrontend
+sh scripts/clean.sh
+sh scripts/build-apk.sh

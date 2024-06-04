@@ -1,0 +1,9 @@
+{
+    "IsEncrypted": false,
+    "Values": {
+        "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+        "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+        "AzureSignalRConnectionString": "Endpoint=https://flutterpoc.service.signalr.net;AccessKey=H8y4ea5jKEWrijwRj8ISpOZA7bVGatwR2bZG4qBrrEk=;Version=1.0;",
+        "ConnectionString": "Endpoint=sb://ihsuprodsgres010dednamespace.servicebus.windows.net/;SharedAccessKeyName=iothubowner;SharedAccessKey=GU1AMb7//nPb37ygLoU96zcNq7hVKnoyjAIoTNsNX3E=;EntityPath=iothub-ehub-iothubpglo-55709046-4073a1f018"
+    }
+}

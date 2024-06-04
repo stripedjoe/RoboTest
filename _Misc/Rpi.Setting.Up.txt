@@ -1,0 +1,82 @@
+1. format fat32 the sdcard then, install the raspberry pi OS via sd card reader 
+
+2. set up the hardware
+
+3. update and upgrade first
+    sudo apt update
+	sudo apt upgrade -y 
+
+4. update the time using ntp https://www.youtube.com/watch?v=Nyr5DI0fuAY
+  sudo apt install ntp
+  sudo apt install ntpdate 
+  sudo ntpdate -q 0.us.pool.ntp.org
+  sudo service ntp stop
+  sudo ntpdate 0.us.pool.ntp.org
+  sudo service ntp start
+  timedatectl status
+  
+  setting the auto sync of time, (this is the fix)
+    sudo apt-get update
+	sudo apt-get install --reinstall systemd-timesyncd
+	
+	sudo nano /etc/systemd/timesyncd.conf
+		change to NTP=pool.ntp.org time1.google.com time.apple.com
+	sudo systemctl restart systemd-timesyncd
+	
+	systemctl status systemd-timesyncd (both of these the status should be active and sync = yes)
+	timedatectl	
+
+5. install anydesk and solve the error of anydesk
+  sudo systemctl status anydesk
+  not supported to bookworm 64bit, just install 32bit bullseye
+  https://forums.raspberrypi.com/viewtopic.php?t=361694 (not supported to bullseye and newer version)
+  https://www.youtube.com/watch?v=vEkgrC6qge8 -> to solve using debian version
+	getconf LONG_BIT  -> check if 32bit
+	lsb_release -a  -> check OS version
+	sudo systemctl status anydesk  -> check if app failed or not
+
+	run these commands to fix anydesk,	
+	sudo apt install libgles-dev libegl-dev -y
+	
+	sudo ls /usr/lib/arm-linux-gnueabihf/libGLE*
+	sudo ls /usr/lib/arm-linux-gnueabihf/libEGL*
+
+	sudo ln -s /usr/lib/arm-linux-gnueabihf/libGLESv2.so /usr/lib/libbrcmGLESv2.so
+	sudo ln -s /usr/lib/arm-linux-gnueabihf/libEGL.so /usr/lib/libbrcmEGL.so
+	
+6. run the anydesk in autostart
+	sudo crontab -e
+	@reboot sudo systemctl restart anydesk (upon reboot, will take 3 mins you can reconnect)
+
+7. to run a python script as terminal when the rpi reboots
+Directory:
+	\home\rpi\.config\autostart\autorun.desktop
+	
+8. connectng to bluethooth
+   install first, (do not do when installed already)
+	sudo apt update
+	sudo apt install bluez bluez-tools
+	sudo systemctl start bluetooth
+	sudo systemctl enable bluetooth
+	
+   to connect commands,
+	bluetoothctl
+	scan on
+	pair <MAC_address> -> pair 00:16:53:5F:6B:CF
+	trust <MAC_address> -> trust 00:16:53:5F:6B:CF
+
+Note:
+-We need to add some delay like 15 seconds just to completely load the system configuration in the RPI
+-We also make sure that the time is synchronize to the current time, otherwise it will return an error
+
+=== common problems
+1. time na out of sync, if this happens the autostart will not work
+	temp fix to manual set date and time sudo timedatectl set-time '2024-05-13 18:57:00'
+	the fix is in no 4
+	
+	
+===other notes
+gucharmap -> to open char map
+lsb_release -a -> to see rpi version
+sudo reboot  -> reboot
+  

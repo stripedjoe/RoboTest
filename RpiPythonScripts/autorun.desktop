@@ -1,0 +1,4 @@
+[Desktop Entry]
+Exec=/usr/bin/lxterminal -e 'python3 /home/rpi/RpiPythonScripts/rpi_receive_messages.py'
+Terminal=true
+Type=Application

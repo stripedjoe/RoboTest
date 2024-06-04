@@ -1,0 +1,10 @@
+{
+    "IsEncrypted": false,
+    "Values": {
+        "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+        "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+        "IoTHubConnectionString": "HostName=IotHubPGlobalPoC.azure-devices.net;SharedAccessKeyName=service;SharedAccessKey=ORA6sSFMRdosWI279Q5wbfkGodV0sEXAXAIoTA3JUZI=",
+        "IoTDeviceId": "RpiPoCDevice",
+        "GetListOfProductCategories": "Party, Wedding, Business, Beach, Sports"
+    }
+}

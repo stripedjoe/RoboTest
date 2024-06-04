@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33815.320
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiPoC", "FlutterPoCFunction\ApiPoC.csproj", "{CC17ABB1-027B-4E2D-8D01-EABBCBB309A7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IotHubPoCListener", "IoTHubListenerFunction\IotHubPoCListener.csproj", "{44FF556B-334D-4B8D-AE65-95F329B6EEEA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CC17ABB1-027B-4E2D-8D01-EABBCBB309A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC17ABB1-027B-4E2D-8D01-EABBCBB309A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC17ABB1-027B-4E2D-8D01-EABBCBB309A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC17ABB1-027B-4E2D-8D01-EABBCBB309A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44FF556B-334D-4B8D-AE65-95F329B6EEEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44FF556B-334D-4B8D-AE65-95F329B6EEEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44FF556B-334D-4B8D-AE65-95F329B6EEEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44FF556B-334D-4B8D-AE65-95F329B6EEEA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B4283167-6340-4A7B-8BD3-937ECC256CF5}
+	EndGlobalSection
+EndGlobal
