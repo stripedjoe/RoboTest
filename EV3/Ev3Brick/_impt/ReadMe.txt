@@ -6,3 +6,4 @@
 
 2. packages are installed in C:\Users\Chito\AppData\Local\Programs\Python\Python312\Lib\site-packages
   and show the version -> pip show pybricks
+  the version of pybricks when fresh installed from create new proj in vscode is 3.3.0
