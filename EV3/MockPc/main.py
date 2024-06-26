@@ -18,21 +18,25 @@ from pybricks.messaging import BluetoothMailboxClient, TextMailbox
 
 # This is the address of the server EV3 we are connecting to.
 SERVER = "D4:36:39:D1:D0:87"
-
 client = BluetoothMailboxClient()
 mbox = TextMailbox("greeting", client)
 
-print("establishing connection...")
-client.connect(SERVER)
-print("connected!")
+try:
+    print("establishing connection...")
+    client.connect(SERVER)
+    print("connected!")
 
-# In this program, the client sends the first message and then waits for the
-# server to reply.
-mbox.send("hello!")
-print("send hello")
+    # In this program, the client sends the first message and then waits for the
+    # server to reply.
+    mbox.send("hello!")
+    print("send hello")
 
-mbox.wait()
-print("wait done")
+    mbox.wait()
+    print("wait done")
 
-message_received = mbox.read()
-print("Message received: ", message_received)
+    message_received = mbox.read()
+    print("Message received: ", message_received)
+except Exception as e:
+    print("An error occurred:", e)
+
+print("All good")
