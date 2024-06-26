@@ -30,6 +30,9 @@ print("connected!")
 # server to reply.
 mbox.send("hello!")
 print("send hello")
+
 mbox.wait()
 print("wait done")
-print(mbox.read())
+
+message_received = mbox.read()
+print("Message received: ", message_received)

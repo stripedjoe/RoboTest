@@ -11,16 +11,20 @@ class BluetoothManager:
         server = BluetoothMailboxServer()
         mbox = TextMailbox("greeting", server)
 
-        # The server must be started before the client!
-        print("waiting for connection...")
-        server.wait_for_connection()
-        print("connected!")
+        try:
+            # The server must be started before the client!
+            print("waiting for connection...")
+            server.wait_for_connection()
+            print("connected!")
 
-        # In this program, the server waits for the client to send the first message
-        # and then sends a reply.
-        mbox.wait()
-        print(mbox.read())
-        mbox.send("hello to you!")
+            # In this program, the server waits for the client to send the first message
+            # and then sends a reply.
+            mbox.wait()
+            print(mbox.read())
+            mbox.send("hello to you!")
+        except Exception as e:
+            print("An error occurred:", e)
 
+        print("all good")
         message_received = "k"
         return message_received

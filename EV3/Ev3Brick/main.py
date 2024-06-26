@@ -6,8 +6,6 @@ from cylindercontroller import CylinderController
 
 
 def main():
-    # ev3 = EV3Brick()
-    # ev3.speaker.beep()
     message_received = BluetoothManager.listen_to_message()  # party
     CylinderController.turn_cyclinder(message_received)
 
