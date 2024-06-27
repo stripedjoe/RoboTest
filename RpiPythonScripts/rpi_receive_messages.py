@@ -9,7 +9,7 @@ from azure.iot.device import IoTHubDeviceClient
 
 CONNECTION_STRING_IOT_HUB = "HostName=IotHubPGlobalPoC.azure-devices.net;DeviceId=RpiPoCDevice;SharedAccessKey=rLPG+ySg4ul1/Oo1DU1h0yKxvs/4EDenQAIoTFh3S4U="
 BASE_URL_API = "https://flutterpocfunction.azurewebsites.net/api"
-MAC_ADDRESS_BLUETOOTH_PAIRING = '00:16:53:5F:6B:CF'
+MAC_ADDRESS_BLUETOOTH_PAIRING = 'D4:36:39:D1:D0:87'
 
 
 class Product:
