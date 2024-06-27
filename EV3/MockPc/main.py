@@ -1,41 +1,30 @@
 #!/usr/bin/env python3
-from pybricks.messaging import BluetoothMailboxClient, TextMailbox
+from time import sleep
 
-# This demo makes your PC talk to an EV3 over Bluetooth.
-#
-# This is identical to the EV3 client example in ../bluetooth_client
-#
-# The only difference is that it runs in Python3 on your computer, thanks to
-# the Python3 implementation of the messaging module that is included here.
-# As far as the EV3 is concerned, it thinks it just talks to an EV3 client.
-#
-# So, the EV3 server example needs no further modifications. The connection
-# procedure is also the same as documented in the messaging module docs:
-# https://docs.pybricks.com/en/latest/messaging.html
-#
-# So, turn Bluetooth on on your PC and the EV3. You may need to make Bluetooth
-# visible on the EV3. You can skip pairing if you already know the EV3 address.
+from pybricks.messaging import TextMailbox, BluetoothMailboxServer
 
-# This is the address of the server EV3 we are connecting to.
-SERVER = 'ev3dev'  # "D4:36:39:D1:D0:87"
-client = BluetoothMailboxClient()
-mbox = TextMailbox('greeting', client)
+server = BluetoothMailboxServer()
+mbox = TextMailbox('greeting', server)
 
 try:
-    print('establishing connection...')
-    client.connect(SERVER)
-    print('connected!')
+    while True:
+        # The server must be started before the client!
+        print('waiting for connection...')
+        server.wait_for_connection()
+        print('connected!')
 
-    # In this program, the client sends the first message and then waits for the
-    # server to reply.
-    mbox.send('hello!')
-    print('send hello')
+        # In this program, the server waits for the client to send the first message
+        # and then sends a reply.
+        mbox.wait()
+        print('wait done')
 
-    mbox.wait()
-    print('wait done')
+        message_received = mbox.read()
+        print('Message received: ', message_received)
+        mbox.send('hello to you!')
 
-    message_received = mbox.read()
-    print("Message received: ", message_received)
+        print('sleep 2')
+        sleep(2)
+
 except Exception as e:
     print("An error occurred:", e)
 
