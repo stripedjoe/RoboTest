@@ -73,8 +73,10 @@ class IotHubListener:
             if not message_timestamp:
                 return
 
-            message_time = message_time = isoparse(message_timestamp)
+            message_time = isoparse(message_timestamp)
+
             if message_time <= self.__script_start_time:
+                print("Do not continue because of time not good")
                 return
 
             message_data = message.data.decode('utf-8')
@@ -111,6 +113,7 @@ class IotHubListener:
             print(f"Sent message to bluetooth device: {message}")
 
             sock.close()
+            print("Bluetooth message sent success")
         except bluetooth.btcommon.BluetoothError as err:
             print(f"Bluetooth error: {err}")
 
