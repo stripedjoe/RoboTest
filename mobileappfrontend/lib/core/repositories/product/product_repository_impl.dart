@@ -5,7 +5,8 @@ import 'package:mobileappfrontend/core/repositories/product/product_repository.d
 import 'package:http/http.dart' as http;
 
 class ProductRepositoryImpl implements ProductRepository {
-  static const String _baseApi = "https://flutterpocfunction.azurewebsites.net";
+  static const String _baseApi =
+      "https://flutterpocfunction.azurewebsites.net"; //"http://10.0.2.2:7167";
 
   final String _getListOfProductCategoriesEndpoint =
       '$_baseApi/api/GetListOfProductCategories';
