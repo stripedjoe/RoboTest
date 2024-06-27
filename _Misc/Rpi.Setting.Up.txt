@@ -64,6 +64,13 @@ Directory:
 	scan on
 	pair <MAC_address> -> pair 00:16:53:5F:6B:CF
 	trust <MAC_address> -> trust 00:16:53:5F:6B:CF
+	
+   this is the exact MAC address of 3VE to test
+	bluetoothctl
+	pair D4:36:39:D1:D0:87
+	trust D4:36:39:D1:D0:87
+	then make sure in rpi_receive_message.py > MAC_ADDRESS_BLUETOOTH_PAIRING = 'D4:36:39:D1:D0:87'
+   
 
 Note:
 -We need to add some delay like 15 seconds just to completely load the system configuration in the RPI
