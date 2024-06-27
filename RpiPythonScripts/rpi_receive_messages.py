@@ -42,10 +42,28 @@ class IotHubListener:
         self.__script_start_time = datetime.now(pytz.utc)
         self.__client = IoTHubDeviceClient.create_from_connection_string(self.__connection_string)
 
+    def main(self):
+        try:
+            self.__client.connect()
+            self.__category_product_collection = self.__get_all_categories_with_products()
+            self.__client.on_message_received = self.__message_handler
+
+            print("Listening for IoT Hub, press Ctrl-C to exit")
+
+            while True:
+                time.sleep(30)
+
+        except KeyboardInterrupt:
+            print("IoT Hub C2D Messaging device stopped")
+        except Exception as ex:
+            print(ex)
+            self.__retry()
+
     def __retry(self):
         print("An error occurred. Retrying in 5 minutes")
         time.sleep(300)
         self.main()
+        print("Retry done")
 
     def __message_handler(self, message):
         try:
@@ -112,23 +130,6 @@ class IotHubListener:
                     return product.numberEquivalent
 
         return "-1"
-
-    def main(self):
-        try:
-            self.__client.connect()
-            self.__category_product_collection = self.__get_all_categories_with_products()
-            self.__client.on_message_received = self.__message_handler
-
-            print("Listening for IoT Hub, press Ctrl-C to exit")
-
-            while True:
-                time.sleep(30)
-
-        except KeyboardInterrupt:
-            print("IoT Hub C2D Messaging device stopped")
-        except Exception as ex:
-            print(ex)
-            self.__retry()
 
 
 if __name__ == '__main__':
