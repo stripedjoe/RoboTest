@@ -77,6 +77,8 @@ Directory:
 	
 	help ( to see all commands)
 	untrust D4:36:39:D1:D0:87
+       
+        what I learned Bluetooth is not connecting well in micropython mode. it should be in original firmware which you can connect Bluetooth with passkey
 
 Note:
 -We need to add some delay like 15 seconds just to completely load the system configuration in the RPI
