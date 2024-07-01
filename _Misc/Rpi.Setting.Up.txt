@@ -84,6 +84,9 @@ Note:
 -We need to add some delay like 15 seconds just to completely load the system configuration in the RPI
 -We also make sure that the time is synchronize to the current time, otherwise it will return an error
 
+9. changing name of rpi
+sudo nano /etc/hostname
+
 === common problems
 1. time na out of sync, if this happens the autostart will not work
 	temp fix to manual set date and time sudo timedatectl set-time '2024-05-13 18:57:00'
