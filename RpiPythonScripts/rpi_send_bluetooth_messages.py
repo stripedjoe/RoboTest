@@ -14,9 +14,9 @@ class BluetoothSender:
     def send_message_to_device(mac_address: str, message: str):
         try:
             sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
-            sock.connect(mac_address, 1)
+            sock.connect((mac_address, 1))
 
-            encoded_message = BluetoothSender.encodeMessage(MessageType.Text, 'abc', message)
+            encoded_message = BluetoothSender.__encode_message(MessageType.Text, 'abc', message)
             sock.send(encoded_message)
             print(f"Sent message: {message}")
 
@@ -25,7 +25,7 @@ class BluetoothSender:
             print(f"Bluetooth error: {err}")
 
     @staticmethod
-    def encode_message(msg_type: MessageType, mail, value):
+    def __encode_message(msg_type: MessageType, mail, value):
         mail = mail + '\x00'
         mail_bytes = mail.encode('ascii')
         mail_size = len(mail_bytes)
