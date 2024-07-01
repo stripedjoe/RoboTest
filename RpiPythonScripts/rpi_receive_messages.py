@@ -7,6 +7,8 @@ from typing import Dict
 from dateutil.parser import isoparse
 from azure.iot.device import IoTHubDeviceClient
 
+from rpi_send_bluetooth_messages import BluetoothSender
+
 CONNECTION_STRING_IOT_HUB = "HostName=IotHubPGlobalPoC.azure-devices.net;DeviceId=RpiPoCDevice;SharedAccessKey=rLPG+ySg4ul1/Oo1DU1h0yKxvs/4EDenQAIoTFh3S4U="
 BASE_URL_API = "https://flutterpocfunction.azurewebsites.net/api"
 MAC_ADDRESS_BLUETOOTH_PAIRING = '00:16:53:5F:38:CB'
@@ -86,13 +88,14 @@ class IotHubListener:
 
     def __send_message_to_bluetooth_device(self, message: str):
         try:
-            sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
-            sock.connect((self.__mac_address, 1))
-
-            sock.send(message)
-            print(f"Sent message to bluetooth device: {message}")
-
-            sock.close()
+            BluetoothSender.send_message_to_device(self.__mac_address, message)
+            # sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
+            # sock.connect((self.__mac_address, 1))
+            #
+            # sock.send(message)
+            # print(f"Sent message to bluetooth device: {message}")
+            #
+            # sock.close()
         except bluetooth.btcommon.BluetoothError as err:
             print(f"Bluetooth error: {err}")
 
