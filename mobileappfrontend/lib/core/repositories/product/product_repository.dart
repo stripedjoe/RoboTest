@@ -6,6 +6,7 @@ abstract class ProductRepository {
   Future<List<Product>> getProductsFromCategoryAsync(String category);
   Future<void> sendSelectedCategoryAsync(String selectedCategory);
   Future<void> sendSelectedProductAsync(String selectedProduct);
+  Future<void> sendAppLifeCycleStateAsync(String state);
 
   // For product_chat_page.dart only
   Future<void> sendProductsAsync(List<Product> products);

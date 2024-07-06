@@ -12,7 +12,8 @@ class ProductListPage extends StatefulWidget {
   State<ProductListPage> createState() => _ProductListPageState();
 }
 
-class _ProductListPageState extends State<ProductListPage> {
+class _ProductListPageState extends State<ProductListPage>
+    with WidgetsBindingObserver {
   final ProductRepository _productRepository =
       GetIt.instance<ProductRepository>();
   final List<Color> _categoriesColors = [
@@ -29,6 +30,8 @@ class _ProductListPageState extends State<ProductListPage> {
     'assets/icons/beach.png',
     'assets/icons/sports.png',
   ];
+  final String _appLifeCycleStart = 'Start';
+  final String _appLifeCycleStop = 'Stop';
 
   String _selectedCategory = '';
   bool _isLoading = true;
@@ -37,6 +40,8 @@ class _ProductListPageState extends State<ProductListPage> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    _productRepository.sendAppLifeCycleStateAsync(_appLifeCycleStart);
     _productRepository.getProductCategoriesAsync().then((categories) {
       setState(() {
         _productCategories = categories;
@@ -45,13 +50,36 @@ class _ProductListPageState extends State<ProductListPage> {
     });
   }
 
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  Future<void> didChangeAppLifecycleState(AppLifecycleState state) async {
+    super.didChangeAppLifecycleState(state);
+
+    if (state == AppLifecycleState.resumed) {
+      await _productRepository.sendAppLifeCycleStateAsync(_appLifeCycleStart);
+      return;
+    }
+
+    if (state == AppLifecycleState.paused) {
+      await _productRepository.sendAppLifeCycleStateAsync(_appLifeCycleStop);
+    }
+  }
+
   Future<void> _sendSelectedCategoryAsync(String selectedCategory) async {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (ctx) =>
-            ProductWithoutChatPage(selectedCategory: selectedCategory),
-      ),
-    );
+    Navigator.of(context)
+        .push(MaterialPageRoute(
+            builder: (ctx) =>
+                ProductWithoutChatPage(selectedCategory: selectedCategory)))
+        .then((value) async {
+      if (value.toString().toLowerCase() == _appLifeCycleStart.toLowerCase()) {
+        await _productRepository.sendAppLifeCycleStateAsync(_appLifeCycleStart);
+      }
+    });
 
     await _productRepository.sendSelectedCategoryAsync(selectedCategory);
   }

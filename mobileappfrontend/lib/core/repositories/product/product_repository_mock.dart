@@ -50,4 +50,10 @@ class ProductRepositoryMock implements ProductRepository {
     //do nothing
     return Future.value();
   }
+
+  @override
+  Future<void> sendAppLifeCycleStateAsync(String state) {
+    //do nothing
+    return Future.value();
+  }
 }

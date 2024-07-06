@@ -64,6 +64,15 @@ class ProductRepositoryImpl implements ProductRepository {
   }
 
   @override
+  Future<void> sendAppLifeCycleStateAsync(String state) async {
+    if (state.isEmpty) {
+      return;
+    }
+
+    await http.post(Uri.parse(_postTriggerEndpoint), body: state);
+  }
+
+  @override
   Future<void> sendProductsAsync(List<Product> products) async {
     if (products.isEmpty) {
       return;

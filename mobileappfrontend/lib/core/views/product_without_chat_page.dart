@@ -29,7 +29,7 @@ class _ProductWithoutChatPageState extends State<ProductWithoutChatPage> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new),
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.of(context).pop('Start');
           },
         ),
         actions: [
