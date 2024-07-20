@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get_it/get_it.dart';
+import 'package:logger/logger.dart';
 import 'package:mobileappfrontend/core/model/products.dart';
 import 'package:mobileappfrontend/core/repositories/product/product_repository.dart';
 import 'package:mobileappfrontend/core/utils/colors.dart';
@@ -10,10 +11,12 @@ import 'package:mobileappfrontend/core/utils/colors.dart';
 class CarouselWidget extends StatefulWidget {
   final List<Product> products;
   final int selectedIndex;
+  final bool isConnected;
 
   const CarouselWidget({
     super.key,
     required this.products,
+    this.isConnected = false,
     this.selectedIndex = -1,
   });
 
@@ -25,6 +28,7 @@ class _CarouselWidgetState extends State<CarouselWidget> {
   final ProductRepository _productRepository =
       GetIt.instance<ProductRepository>();
   final CarouselController _carouselController = CarouselController();
+  final Logger _logger = Logger();
 
   int _currentIndex = 0;
   int _selectedIndex = -1;
@@ -37,6 +41,8 @@ class _CarouselWidgetState extends State<CarouselWidget> {
 
   @override
   Widget build(BuildContext context) {
+    _logger.w('Is connected: ${widget.isConnected}');
+
     return Center(
       child: Column(
         children: [
