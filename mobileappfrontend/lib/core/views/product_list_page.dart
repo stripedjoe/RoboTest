@@ -33,7 +33,7 @@ class _ProductListPageState extends State<ProductListPage>
     'assets/icons/business.png',
     'assets/icons/sports.png',
     'assets/icons/beach.png',
-    'assets/icons/globe.png',
+    'assets/icons/users.png',
   ];
   final String _appLifeCycleStart = 'Start';
   final String _appLifeCycleStop = 'Stop';
@@ -51,7 +51,7 @@ class _ProductListPageState extends State<ProductListPage>
       setState(() {
         _productCategories = categories;
         _productCategories.add(
-          Category(
+          const Category(
             name: 'Globe',
             numberEquivalent: '6',
             products: [],
